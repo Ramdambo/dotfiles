@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+PID=$(pgrep -x sleeptimer)
+kill -9 $PID &> /dev/null
+if [ $# -eq 0 ]; then
+	SLEEP=3600
+else
+	SLEEP=$(($1*60))
+fi
+# Notify user every 10 minutes how much time is left
+STEP=600
+if [ $STEP -gt $SLEEP ]; then
+	STEP=$SLEEP
+fi
+CURRENT=$SLEEP
+while [ $CURRENT -gt 0 ] 
+do
+	TIME_LEFT=$(($CURRENT/60))
+	if [ $TIME_LEFT -eq 1 ]; then
+		echo "Suspend in 1 minute..."
+		notify-send "Suspend in 1 minute..."
+	else
+		echo "Suspend in $TIME_LEFT minutes..."
+		notify-send "Suspend in $TIME_LEFT minutes..."
+	fi
+	sleep $STEP
+	CURRENT=$(($CURRENT-$STEP))
+done
+echo "Suspending system"
+systemctl suspend
