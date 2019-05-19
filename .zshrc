@@ -62,5 +62,6 @@ mkcd() {
    cd $1
 }
 
-export CURRENT_TERM="$HOME/uni/ss19"
 alias points="$CURRENT_TERM/points"
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
