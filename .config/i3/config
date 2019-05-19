@@ -139,8 +139,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -199,8 +199,8 @@ bar {
 }
 
 # i3-gaps
-gaps inner 10
-gaps outer 0
+# gaps inner 10
+# gaps outer 0
 
 # Exit menu
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -218,10 +218,9 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+m mode "$mode_system"
 
-set $mode_quickstart Start (f) Firefox (w) WhatsApp (s) Spotify (t) Sleeptimer
+set $mode_quickstart Start (f) Firefox (s) Spotify (t) Sleeptimer
 mode "$mode_quickstart" {
 	bindsym f exec --no-startup-id firefox, mode "default"
-	bindsym w exec --no-startup-id whatsie, mode "default"
 	bindsym s exec --no-startup-id spotify, mode "default"
 	bindsym t exec --no-startup-id sleeptimer , mode "default"
 
@@ -229,9 +228,6 @@ mode "$mode_quickstart" {
 	bindsym Escape mode "default"
 }
 bindsym $mod+Shift+q mode "$mode_quickstart"
-
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/triforce.png
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/boulder.jpg

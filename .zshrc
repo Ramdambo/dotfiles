@@ -48,8 +48,9 @@ antigen bundle sudo
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-# antigen theme evan 
-antigen theme agnoster
+antigen theme evan 
+# antigen theme agnoster
+# antigen theme afowler
 
 # Tell Antigen that you're done.
 antigen apply
