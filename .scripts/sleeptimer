@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 PID=$(pgrep -x sleeptimer)
-kill -9 $PID &> /dev/null
+if [ $PID != $$ ]; then
+	kill -9 $PID &> /dev/null
+fi
 if [ $# -eq 0 ]; then
 	SLEEP=3600
 else
@@ -16,14 +18,14 @@ while [ $CURRENT -gt 0 ]
 do
 	TIME_LEFT=$(($CURRENT/60))
 	if [ $TIME_LEFT -eq 1 ]; then
-		echo "Suspend in 1 minute..."
-		notify-send "Suspend in 1 minute..."
+		echo "Suspending system in 1 minute..."
+		notify-send "Sleeptimer" "Suspending system in 1 minute..."
 	else
-		echo "Suspend in $TIME_LEFT minutes..."
-		notify-send "Suspend in $TIME_LEFT minutes..."
+		echo "Suspending system in $TIME_LEFT minutes..."
+		notify-send "Sleeptimer" "Suspending system in $TIME_LEFT minutes..."
 	fi
 	sleep $STEP
 	CURRENT=$(($CURRENT-$STEP))
 done
-echo "Suspending system"
+echo "Sleeptimer" "Suspending system"
 systemctl suspend

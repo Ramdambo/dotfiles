@@ -62,7 +62,7 @@ mkcd() {
    mkdir -p $1
    cd $1
 }
-
+export EDITOR="vim"
 alias points="$CURRENT_TERM/points"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-
+eval  "$(direnv hook zsh)"
