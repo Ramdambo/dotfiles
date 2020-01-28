@@ -1,0 +1,110 @@
+* {
+    font-size: 13px;
+    font-family: FuraMono Nerd Font;
+}
+
+window#waybar {
+    background: #292b2e;
+    color: #00b8ff;
+    /*color: #fdf6e3;*/
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+    color: #1a1a1a;
+}
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+    color: #292b2e;
+    background: #1a1a1a;
+}
+
+#custom-left-arrow-battery {
+    color: #001eff ;
+    background: #00b8ff;
+}
+#custom-left-arrow-cpu {
+    color: #00b8ff;
+    background: #ff901f;
+    /*background: #00ff9f;*/
+}
+#custom-left-arrow-network{
+    /*color: #00ff9f;*/
+    color: #ff901f;
+    background: #bd00ff;
+}
+#custom-left-arrow-audio {
+    background: #00ff9f;
+    color: #bd00ff;
+}
+#custom-left-arrow-music {
+    background: #292b2e;
+    color: #00ff9f;
+}
+
+#workspaces,
+#pulseaudio,
+#network,
+#memory,
+#cpu,
+#battery,
+#disk,
+#custom-spotify,
+#tray {
+    color: #000000;
+    background: #1a1a1a;
+}
+
+#clock.1,
+#clock.2,
+#clock.3 {
+    background: #1a1a1a;
+}
+
+#workspaces button {
+    padding: 0 2px;
+    color: #00b8ff;
+}
+#workspaces button.focused {
+    color: #d600ff;
+}
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+#workspaces button:hover {
+    background: #1a1a1a;
+    border: #1a1a1a;
+    padding: 0 3px;
+}
+
+#custom-spotify {
+    background: #00ff9f;
+}
+#pulseaudio {
+    background: #bd00ff;
+}
+#network {
+    /*background: #00ff9f;*/
+    background: #ff901f;
+}
+#memory {
+    background: #2aa198;
+}
+#cpu {
+    background: #00b8ff;
+}
+#battery {
+    background: #001eff ;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#network,
+#custom-spotify,
+#disk {
+    padding: 0 10px;
+}

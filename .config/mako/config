@@ -1,0 +1,18 @@
+font=Roboto Mono Nerd Font Regular 10
+default-timeout=5000
+background-color=#000000
+text-color=#ffffff
+border-color=#333333
+border-radius=6
+border-size=0
+margin=5
+padding=10
+
+[hidden]
+format=(and %h more)
+text-color=#777777
+
+[urgency=high]
+background-color=#c00000
+border-color=#ff0000
+
