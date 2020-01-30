@@ -48,7 +48,7 @@ workspace 10 output HDMI-A-1
 output * bg ~/Pictures/Wallpapers/neon3.jpg fit 
 output HDMI-A-1 resolution 1920x1080 position 0,0
 output eDP-1 resolution 1920x1080 position 0,1080
-#
+
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration

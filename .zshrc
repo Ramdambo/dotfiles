@@ -5,8 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source .profile
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -47,7 +45,6 @@ antigen bundle npm
 antigen bundle sudo
 antigen bundle python
 antigen bundle archlinux
-antigen bundle you-should-use
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
