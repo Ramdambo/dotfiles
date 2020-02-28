@@ -42,7 +42,7 @@ antigen bundle pip
 antigen bundle command-not-found
 antigen bundle wd
 antigen bundle npm
-antigen bundle sudo
+antigen bundle vi-mode 
 antigen bundle python
 antigen bundle archlinux
 

@@ -4,11 +4,8 @@ export GRIM_DEFAULT_DIR="/home/daniel/Pictures/Screenshots"
 
 alias vim="nvim"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-
-grab() {
-    GEOM=$(slurp)
-    grim -g "$GEOM"
-}
+alias remove="yay -Rns"
+alias grab="grim -g \"$(slurp)\""
 
 mkcd() {
    mkdir -p $1
@@ -16,5 +13,5 @@ mkcd() {
 }
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
- exec sway
+ exec sway 
 fi
