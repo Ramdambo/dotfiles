@@ -1,4 +1,8 @@
 " Custom keybinds
+let mapleader = ','
+let maplocalleader = ','
+
+map Q qq
 inoremap jj <esc>
 nmap <A-o> o<esc>k
 nmap <A-S-o> O<esc>j
@@ -8,15 +12,20 @@ map <A-a> <C-w>h
 map <A-s> <C-w>j
 map <A-w> <C-w>k
 map <A-d> <C-w>l
+
 map <A-S-s> :split<cr>
 map <A-S-d> :vsplit<cr>
 map <A-y> :wq<cr>
 map <A-x> :q!<cr>
 map <A-e> :w<cr>
 map <A-v> <C-v>
-nnoremap ma A;<esc>
-nnoremap ms A:<esc>
-nnoremap md A{<esc>
+
+map <Leader>T '
+nmap <Leader>x xph
+map <Leader>s /
+map <Leader>S :%s/
+
+nnoremap E ea
 
 map gl $
 map gh ^
@@ -26,15 +35,17 @@ nnoremap <silent> <A-k> :call comfortable_motion#flick(-100)<CR>
 
 set splitbelow
 set splitright
-set scrolloff=999
+set scrolloff=10
 set tw=99
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
+Plug 'voldikss/vim-floaterm'
 
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -67,9 +78,6 @@ Plug 'vim-airline/vim-airline-themes'
 " Better Visual Guide
 Plug 'Yggdroot/indentLine'
 
-" Syntax check
-Plug 'w0rp/ale'
-
 " Formatter
 Plug 'fisadev/vim-isort'
 
@@ -91,6 +99,9 @@ set noshowmode
 set noshowmatch
 set nolazyredraw
 
+" Automatically refresh files when they are changed outside the buffer
+set autoread
+
 
 " Turn off backup
 set nobackup
@@ -110,16 +121,28 @@ set updatetime=300
 set cmdheight=2
 set signcolumn=yes
 
+autocmd Filetype c setlocal tabstop=2
+autocmd Filetype c setlocal shiftwidth=2
+autocmd Filetype cpp setlocal tabstop=2
+autocmd Filetype cpp setlocal shiftwidth=2
+
+" Underline the current line
+set cursorline
+hi clear CursorLine
+hi CursorLine cterm=underline gui=underline
+
+
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Coc Stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? "\<C-n>" : 
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+let g:coc_snippet_next = '<tab>'
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -150,7 +173,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -238,14 +260,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Nerdtree
 noremap <C-o> :NERDTreeToggle<CR>
 
-" Ale
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_linters = {'python': ['flake8']}
-
 " Airline
 let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
@@ -259,9 +273,25 @@ let g:vim_isort_map = '<C-i>'
 set clipboard=unnamedplus
 
 " LaTeX options
+let g:polyglot_disabled = ['latex']
+let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = ''
 let g:vimtex_latexmk_continuous = 1
 let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_format_enabled = 1
-let g:vimtex_syntax_enabled = 0
+
+" Easymotion bindings
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
+" Floaterm
+let g:floaterm_keymap_toggle = '<Leader>tt'
+map <silent> <Leader>tg :FloatermNew lazygit<cr>
+map <silent> <Leader>tp :FloatermNew wintype=normal position=right width=0.5 name=REPL python<cr>
+map <silent> <Leader>tsp :'<,'>FloatermSend <cr>

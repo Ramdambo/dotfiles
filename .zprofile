@@ -1,6 +1,6 @@
 export EDITOR="nvim"
 export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
-export GRIM_DEFAULT_DIR="/home/daniel/Pictures/Screenshots"
+export GRIM_DEFAULT_DIR="$HOME/Pictures/Screenshots"
 
 alias vim="nvim"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
@@ -12,6 +12,3 @@ mkcd() {
    cd $1
 }
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
- exec sway 
-fi

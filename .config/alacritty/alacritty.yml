@@ -1,34 +1,33 @@
-font:
+colors:
+  bright:
+    black: '#909895'
+    blue: '#4BA6A8'
+    cyan: '#E5A19E'
+    green: '#F15966'
+    magenta: '#5CAAAA'
+    red: '#F73249'
+    white: '#cedad5'
+    yellow: '#2D888D'
   normal:
-    family: Fura Code Nerd Font
-    style: Regular
+    black: '#121215'
+    blue: '#4BA6A8'
+    cyan: '#E5A19E'
+    green: '#F15966'
+    magenta: '#5CAAAA'
+    red: '#F73249'
+    white: '#cedad5'
+    yellow: '#2D888D'
+  primary:
+    background: '#121215'
+    cursor: '#cedad5'
+    foreground: '#cedad5'
+font:
   bold:
     family: Fura Code Nerd Font
     style: Bold
   italic:
     family: Fura Code Nerd Font
     style: Italic
-
-colors:
-  primary:
-    background: "#0d041b"
-    foreground: "#f3c4a8"
-
   normal:
-    black: "#0d041b"
-    red: "#B7452A"
-    green: "#DD5C35"
-    yellow: "#8E354B"
-    blue: "#AB4150"
-    magenta: "#E8694B"
-    cyan: "#F99745"
-    white: "#f3c4a8"
-  bright:
-    black: "#aa8975"
-    red: "#B7452A"
-    green: "#DD5C35"
-    yellow: "#8E354B"
-    blue: "#AB4150"
-    magenta: "#E8694B"
-    cyan: "#F99745"
-    white: "#f3c4a8"
+    family: Fura Code Nerd Font
+    style: Regular
