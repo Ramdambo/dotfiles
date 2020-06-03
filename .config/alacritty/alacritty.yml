@@ -1,33 +1,47 @@
-colors:
-  bright:
-    black: '#909895'
-    blue: '#4BA6A8'
-    cyan: '#E5A19E'
-    green: '#F15966'
-    magenta: '#5CAAAA'
-    red: '#F73249'
-    white: '#cedad5'
-    yellow: '#2D888D'
-  normal:
-    black: '#121215'
-    blue: '#4BA6A8'
-    cyan: '#E5A19E'
-    green: '#F15966'
-    magenta: '#5CAAAA'
-    red: '#F73249'
-    white: '#cedad5'
-    yellow: '#2D888D'
-  primary:
-    background: '#121215'
-    cursor: '#cedad5'
-    foreground: '#cedad5'
 font:
+  normal:
+    family: Fura Code Nerd Font
+    style: Regular
   bold:
     family: Fura Code Nerd Font
     style: Bold
   italic:
     family: Fura Code Nerd Font
     style: Italic
+
+# color_start
+# base16_default_dark.yaml
+# Colors (Base16 Default Dark)
+colors:
+  # Default colors
+  primary:
+    background: '0x181818'
+    foreground: '0xd8d8d8'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0xd8d8d8'
+    cursor: '0xd8d8d8'
+
+  # Normal colors
   normal:
-    family: Fura Code Nerd Font
-    style: Regular
+    black:   '0x181818'
+    red:     '0xab4642'
+    green:   '0xa1b56c'
+    yellow:  '0xf7ca88'
+    blue:    '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan:    '0x86c1b9'
+    white:   '0xd8d8d8'
+
+  # Bright colors
+  bright:
+    black:   '0x585858'
+    red:     '0xab4642'
+    green:   '0xa1b56c'
+    yellow:  '0xf7ca88'
+    blue:    '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan:    '0x86c1b9'
+    white:   '0xf8f8f8'
+# color_end

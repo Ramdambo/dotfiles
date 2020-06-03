@@ -1,4 +1,4 @@
-include "$HOME/.cache/wal/colors-sway"
+#include "$HOME/.cache/wal/colors-sway"
 xwayland enable
 input * xkb_layout "de"
 # Default config for sway
@@ -82,7 +82,7 @@ bindsym $mod+u workspace next
 ### Output configuration
 #
 
-output * bg ~/Pictures/Wallpapers/ineedsleep.png fill
+output * bg ~/Pictures/Wallpapers/dark.png fill
 output HDMI-A-1 resolution 1920x1080 position 0,0
 output eDP-1 resolution 1920x1080 position 0,1080
 
@@ -216,8 +216,8 @@ bindsym $mod+Shift+n exec playerctl next
 bindsym $mod+Shift+p exec playerctl previous
 
 # class                 border  backgr. text    indicator child_border
-client.focused          $color2 $color2 $color2 $color2 $color2
-client.unfocused        $background $background $background $background $background   
+client.focused          #3e3e3e #3e3e3e #3e3e3e #3e3e3e   #3e3e3e
+client.unfocused        #2f2f2f #2f2f2f #2f2f2f #2f2f2f   #2f2f2f
 
 # Exit menu
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -245,4 +245,4 @@ bindsym Shift+F11 exec grim -g "$(slurp)"
 exec mako
 
 # Make unfocused windows transparent
-# exec python ~/.config/sway/inactive-windows-transparency.py
+#exec python ~/.config/sway/inactive-windows-transparency.py

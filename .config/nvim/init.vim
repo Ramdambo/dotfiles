@@ -81,6 +81,8 @@ Plug 'Yggdroot/indentLine'
 " Formatter
 Plug 'fisadev/vim-isort'
 
+" Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
 
 filetype plugin indent on
@@ -88,7 +90,7 @@ filetype plugin indent on
 syntax on
 
 colorscheme wal
-"let g:airline_theme='deus'
+let g:airline_theme='distinguished'
 
 set shortmess+=c
 
@@ -138,7 +140,7 @@ hi CursorLine cterm=underline gui=underline
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" : 
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
@@ -261,11 +263,11 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 noremap <C-o> :NERDTreeToggle<CR>
 
 " Airline
+let g:airline_powerline_fonts = 1
 let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
-let g:airline#extensions#ale#enabled = 1
-let airline#extensions#ale#error_symbol = 'E:'
-let airline#extensions#ale#warning_symbol = 'W:'
+let g:airline_skip_empty_sections = 1
+let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
 
 " Isort keybinds
 let g:vim_isort_map = '<C-i>'
@@ -294,4 +296,4 @@ let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 let g:floaterm_keymap_toggle = '<Leader>tt'
 map <silent> <Leader>tg :FloatermNew lazygit<cr>
 map <silent> <Leader>tp :FloatermNew wintype=normal position=right width=0.5 name=REPL python<cr>
-map <silent> <Leader>tsp :'<,'>FloatermSend <cr>
+
