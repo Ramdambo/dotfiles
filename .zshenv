@@ -1,5 +1,3 @@
-source /opt/ros/melodic/setup.zsh
-
 export EDITOR="nvim"
 export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
 export GRIM_DEFAULT_DIR="$HOME/Pictures/Screenshots"

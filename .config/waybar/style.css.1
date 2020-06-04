@@ -1,0 +1,133 @@
+/*-START-GENERATED-CODE-*/
+@define-color background #121215;
+@define-color foreground #cedad5;
+@define-color cursor #cedad5;
+@define-color color0 #121215;
+@define-color color1 #F73249;
+@define-color color2 #F15966;
+@define-color color3 #2D888D;
+@define-color color4 #4BA6A8;
+@define-color color5 #5CAAAA;
+@define-color color6 #E5A19E;
+@define-color color7 #cedad5;
+@define-color color8 #909895;
+@define-color color9 #F73249;
+@define-color color10 #F15966;
+@define-color color11 #2D888D;
+@define-color color12 #4BA6A8;
+@define-color color13 #5CAAAA;
+@define-color color14 #E5A19E;
+@define-color color15 #cedad5;
+/*-END-GENERATED-CODE-*/
+* {
+    font-size: 13px;
+    font-family: FuraCode Nerd Font;
+}
+
+window#waybar {
+    background: @background;
+    color: @foreground;
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+    color: @color2;
+}
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+    color: #292b2e;
+    background: #1a1a1a;
+}
+
+#custom-left-arrow-battery {
+    color: @color5;
+    background: @color4;
+}
+#custom-left-arrow-cpu {
+    color: @color4;
+    background: @color2;
+}
+#custom-left-arrow-network{
+    /*color: #00ff9f;*/
+    color: @color2;
+    background: @color1;
+}
+#custom-left-arrow-audio {
+    background: @color6;
+    color: @color1;
+}
+#custom-left-arrow-music {
+    background: @background;
+    color: @color6;
+}
+
+#workspaces,
+#pulseaudio,
+#network,
+#memory,
+#cpu,
+#battery,
+#disk,
+#custom-spotify,
+#tray {
+    color: #000000;
+}
+
+#clock.1,
+#clock.2,
+#clock.3,
+#custom-timediff {
+    color: #000000;
+    background: @color2;
+}
+
+#workspaces {
+    background: @color2;
+}
+
+#workspaces button {
+    padding: 0 2px;
+    color: @background;
+}
+#workspaces button.focused {
+    color: @foreground;
+}
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+#workspaces button:hover {
+    background: @color9;
+    border: @color9;
+    padding: 0 3px;
+}
+
+#custom-spotify {
+    background: @color6;
+}
+#pulseaudio {
+    background: @color1;
+}
+#network {
+    background: @color2;
+}
+#memory {
+    background: @color3;
+}
+#cpu {
+    background: @color4;
+}
+#battery {
+    background: @color5;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#network,
+#custom-spotify,
+#disk {
+    padding: 0 10px;
+}

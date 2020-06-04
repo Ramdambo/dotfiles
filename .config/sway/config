@@ -245,4 +245,5 @@ bindsym Shift+F11 exec grim -g "$(slurp)"
 exec mako
 
 # Make unfocused windows transparent
-#exec python ~/.config/sway/inactive-windows-transparency.py
+exec python ~/.config/sway/inactive-windows-transparency.py
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

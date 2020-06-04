@@ -46,7 +46,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
 antigen theme romkatv/powerlevel10k
-#antigen theme cypher
 
 # Tell Antigen that you're done.
 antigen apply

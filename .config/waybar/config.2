@@ -1,0 +1,95 @@
+// vim: set filetype=json: */
+{
+    "layer": "bottom",
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [
+        "clock#1",
+        "clock#2",
+        "clock#3"
+    ],
+    "modules-right": [
+        "custom/spotify",
+        "pulseaudio",
+        "network",
+        "cpu",
+        "battery"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "format": "{name}"
+    },
+    "clock#1": {
+        "format": "{:%a, }",
+        "tooltip": false
+    },
+    "clock#2": {
+        "format": "{:%d.%m}",
+        "tooltip": false
+    },
+    "clock#3": {
+        "format": "{:%H:%M}",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume:2}%",
+        "format-bluetooth": "{icon}  {volume:2}%",
+        "format-muted": "MUTE",
+        "format-icons": {
+            "headphones": "",
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "memory": {
+        "interval": 5,
+        "format": "Mem {}%"
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "CPU {usage:2}%"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "{icon} Charging: {time}",
+        "format-full": "{icon} Full",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "network": {
+        "interface": "wlp2s0",
+        "format": "{ifname}",
+        "format-wifi": " {essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+    "custom/spotify": {
+        "format": "  {}",
+        "return-type": "json",
+        "max-length": 30,
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
+        "on-click": "playerctl play-pause"
+    },
+    "tray": {
+        "icon-size": 20
+    }
+}
