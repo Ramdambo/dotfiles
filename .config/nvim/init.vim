@@ -8,10 +8,10 @@ nmap <A-o> o<esc>k
 nmap <A-S-o> O<esc>j
 nnoremap <A-h> :nohlsearch<cr>
 
-map <A-a> <C-w>h
-map <A-s> <C-w>j
-map <A-w> <C-w>k
-map <A-d> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 map <A-S-s> :split<cr>
 map <A-S-d> :vsplit<cr>
@@ -21,6 +21,7 @@ map <A-e> :w<cr>
 map <A-v> <C-v>
 
 map <Leader>T '
+" Switch 2 letters
 nmap <Leader>x xph
 map <Leader>s /
 map <Leader>S :%s/
@@ -32,6 +33,8 @@ map gh ^
 
 nnoremap <silent> <A-j> :call comfortable_motion#flick(100)<CR>
 nnoremap <silent> <A-k> :call comfortable_motion#flick(-100)<CR>
+
+nmap <F8> :TagbarToggle<CR>
 
 set splitbelow
 set splitright
@@ -46,6 +49,7 @@ Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
 Plug 'voldikss/vim-floaterm'
+Plug 'majutsushi/tagbar'
 
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -89,7 +93,9 @@ filetype plugin indent on
 
 syntax on
 
-colorscheme wal
+colorscheme base16-gruvbox-dark-medium
+
+set guifont=FuraCode\ Nerd\ Font:h12
 let g:airline_theme='distinguished'
 
 set shortmess+=c
@@ -130,8 +136,8 @@ autocmd Filetype cpp setlocal shiftwidth=2
 
 " Underline the current line
 set cursorline
-hi clear CursorLine
-hi CursorLine cterm=underline gui=underline
+"hi clear CursorLine
+"hi CursorLine cterm=underline gui=underline
 
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Coc Stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -7,8 +7,8 @@ input * xkb_layout "de"
 #
 # Read `man 5 sway` for a complete reference.
 
-gaps inner 20px
-gaps outer 10px
+#gaps inner 20px
+#gaps outer 10px
 
 ### Variables
 #
@@ -82,7 +82,7 @@ bindsym $mod+u workspace next
 ### Output configuration
 #
 
-output * bg ~/Pictures/Wallpapers/dark.png fill
+output * bg ~/Pictures/Wallpapers/neon.jpg fill
 output HDMI-A-1 resolution 1920x1080 position 0,0
 output eDP-1 resolution 1920x1080 position 0,1080
 

@@ -8,6 +8,7 @@ font:
   italic:
     family: Fura Code Nerd Font
     style: Italic
+  size: 12
 
 # color_start
 # gruvbox_dark.yaml
