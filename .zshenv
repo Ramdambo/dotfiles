@@ -14,6 +14,3 @@ mkcd() {
    cd $1
 }
 
-alias ccc="g++ -x c++ -Wall -O2 -static -pipe -o"
-alias ccd="g++ -Wall -Wextra -fsanitize=undefined,address -D_GLIBCXX_DEBUG -g -o"
-
