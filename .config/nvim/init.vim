@@ -1,156 +1,63 @@
-" Custom keybinds
+" , as leader is easier to reach than the default
 let mapleader = ','
 let maplocalleader = ','
 
-map Q qq
-inoremap jj <esc>
-nmap <A-o> o<esc>k
-nmap <A-S-o> O<esc>j
-nnoremap <A-h> :nohlsearch<cr>
-
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-map <A-S-s> :split<cr>
-map <A-S-d> :vsplit<cr>
-map <A-y> :wq<cr>
-map <A-x> :q!<cr>
-map <A-e> :w<cr>
-map <A-v> <C-v>
-
-map <Leader>T '
-" Switch 2 letters
-nmap <Leader>x xph
-map <Leader>s /
-map <Leader>S :%s/
-
-nnoremap E ea
-
-map gl $
-map gh ^
-
-nnoremap <silent> <A-j> :call comfortable_motion#flick(100)<CR>
-nnoremap <silent> <A-k> :call comfortable_motion#flick(-100)<CR>
-
-nmap <F8> :TagbarToggle<CR>
-
-set splitbelow
-set splitright
-set scrolloff=10
-set tw=99
-
 call plug#begin('~/.vim/plugged')
 
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-surround'
-Plug 'ryanoasis/vim-devicons'
-Plug 'jiangmiao/auto-pairs'
-Plug 'voldikss/vim-floaterm'
-Plug 'majutsushi/tagbar'
-
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-
-Plug 'kien/ctrlp.vim'
-
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-
-Plug 'honza/vim-snippets'
-Plug 'sheerun/vim-polyglot'
-
-Plug 'tpope/vim-unimpaired'
-Plug 'dylanaraps/wal.vim'
-
-Plug 'lervag/vimtex'
-
-" Autocompletion with CoC
+" Linting/Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Jinja
-Plug 'lepture/vim-jinja'
+" Navigation plugins
+Plug 'unblevable/quick-scope'
+" Navigate with web inside camelCase etc
+Plug 'chaoren/vim-wordmotion'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+
+" Editing improvements
+Plug 'svermeulen/vim-subversive'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'honza/vim-snippets'
+
+" UI
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
+Plug 'lervag/vimtex'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " UI related
-Plug 'chriskempson/base16-vim'
-Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
+" Display git icons at the beginning of each line
+Plug 'airblade/vim-gitgutter'
 " Better Visual Guide
 Plug 'Yggdroot/indentLine'
 
+" Misc
+Plug 'airblade/vim-rooter'
+
+" Themes
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sainnhe/gruvbox-material'
+Plug 'doums/darcula'
+Plug 'gryf/wombat256grf'
+
+
 " Formatter
 Plug 'fisadev/vim-isort'
-
-" Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
 
-filetype plugin indent on
-
-syntax on
-
-colorscheme base16-gruvbox-dark-medium
-
-set guifont=FuraCode\ Nerd\ Font:h12
-let g:airline_theme='distinguished'
-
-set shortmess+=c
-
-set nu
-set hidden
-set mouse=a
-set noshowmode
-set noshowmatch
-set nolazyredraw
-
-" Automatically refresh files when they are changed outside the buffer
-set autoread
-
-
-" Turn off backup
-set nobackup
-set noswapfile
-set nowritebackup
-
-" Search configuration
-set ignorecase                    " ignore case when searching
-set smartcase                     " turn on smartcase
-
-" Tab and Indent configuration
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
-set updatetime=300
-set cmdheight=2
-set signcolumn=yes
-
-autocmd Filetype c setlocal tabstop=2
-autocmd Filetype c setlocal shiftwidth=2
-autocmd Filetype cpp setlocal tabstop=2
-autocmd Filetype cpp setlocal shiftwidth=2
-
-" Underline the current line
-set cursorline
-"hi clear CursorLine
-"hi CursorLine cterm=underline gui=underline
-
-
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Coc Stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" CoC
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-let g:coc_snippet_next = '<tab>'
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -170,8 +77,8 @@ else
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <space>k <Plug>(coc-diagnostic-prev)
+nmap <silent> <space>j <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -180,7 +87,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <space>k :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -224,12 +131,6 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 noremap <F3> :Format<CR>
@@ -240,16 +141,11 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings using CoCList:
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>r  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
@@ -265,30 +161,158 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Coc Stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-" Nerdtree
-noremap <C-o> :NERDTreeToggle<CR>
+syntax on
 
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep  = ''
-let g:airline_right_sep = ''
-let g:airline_skip_empty_sections = 1
-let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
+set number relativenumber
+set hidden
+set mouse=a
+set noshowmode
+set noshowmatch
+set nolazyredraw
 
-" Isort keybinds
-let g:vim_isort_map = '<C-i>'
 
+" UI themes
+colorscheme gruvbox-material
+let g:airline_theme='distinguished'
+
+set shortmess+=c
+
+" Automatically refresh files when they are changed outside the buffer
+set autoread
+
+" Turn off backup
+set nobackup
+set noswapfile
+set nowritebackup
+
+" Search configuration
+set ignorecase                    " ignore case when searching
+set smartcase                     " turn on smartcase
+
+" Tab and Indent configuration
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+set updatetime=300
+set cmdheight=2
+set signcolumn=yes
+
+" Center vertically
+set scrolloff=10
+
+" Use system clipboard
 set clipboard=unnamedplus
 
-" LaTeX options
-let g:polyglot_disabled = ['latex']
+" LaTeX:
 let g:vimtex_compiler_progname = 'nvr'
+
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = ''
+
 let g:vimtex_latexmk_continuous = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_format_enabled = 1
+
+" Easymotion: 
+" Keep cursor column when JK motion
+let g:EasyMotion_startofline = 0 
+
+" Fzf:
+" configuration
+let g:fzf_preview_window = 'right:60%'
+let $FZF_DEFAULT_OPTS = '--layout=reverse'
+
+let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+
+function! OpenFloatingWin()
+   let height = &lines - 3
+   let width = float2nr(&columns - (&columns * 2 / 10))
+   let col = float2nr((&columns - width) / 2)
+
+   let opts = {
+        \ 'relative': 'editor',
+        \ 'row': height * 0.3,
+        \ 'col': col + 30,
+        \ 'width': width * 2 / 3,
+        \ 'height': height / 2
+        \ }
+
+   let buf = nvim_create_buf(v:false, v:true)
+   let win = nvim_open_win(buf, v:true, opts)
+
+   call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+   setlocal
+        \ buftype=nofile
+        \ nobuflisted
+        \ bufhidden=hide
+        \ nonumber
+        \ norelativenumber
+        \ signcolumn=no
+endfunction
+
+" Vista:
+" UI configuration
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+
+" Wordmotion:
+" let g:wordmotion_spaces = ',_-.:<>/(){}*&'
+
+" incsearch.vim x fuzzy x vim-easymotion
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzy#converter()],
+  \   'modules': [incsearch#config#easymotion#module()],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+"------------------------- Keybindings -----------------------
+
+" Prevent accidentally going into Ex mode
+map Q qq
+
+" Faster exiting from insert mode
+inoremap jj <esc>
+
+" New lines before and after cursor
+nmap <A-o> o<esc>k
+nmap <A-S-o> O<esc>j
+
+" Stop highlighting search results
+nnoremap <A-h> :nohlsearch<cr>
+
+" Split navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" New splits
+map <A-S-j> :split<cr>
+map <A-S-l> :vsplit<cr>
+
+" Exit commands
+map <A-y> :wq<cr>
+map <A-x> :q!<cr>
+map <A-e> :w<cr>
+map <A-v> <C-v>
+
+" Switch 2 letters
+nmap <Leader>x xph
+
+" Enter search mode
+map <Leader>s /
+
+" Go to first and last characters in line
+map <space>l $
+map <space>h ^
 
 " Easymotion bindings
 nmap s <Plug>(easymotion-s2)
@@ -296,10 +320,20 @@ nmap t <Plug>(easymotion-t2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+" Vim-subversive bindings
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
 
-" Floaterm
-let g:floaterm_keymap_toggle = '<Leader>tt'
-map <silent> <Leader>tg :FloatermNew lazygit<cr>
-map <silent> <Leader>tp :FloatermNew wintype=normal position=right width=0.5 name=REPL python<cr>
+" Vim-Vista bindings
+nmap <space>v :Vista!!<cr>
+nmap <space>f :Vista finder<cr>
 
+" Coc-Explorer
+nmap <space>e :CocCommand explorer<cr>
+
+"Fuzzy + Incsearch + Easymotion
+" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+map <space>zs <Plug>(incsearch-easymotion-/)
+map <space>zS <Plug>(incsearch-easymotion-?)
+map <space>zg <Plug>(incsearch-easymotion-stay)
