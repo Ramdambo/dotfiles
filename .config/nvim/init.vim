@@ -6,9 +6,13 @@ call plug#begin('~/.vim/plugged')
 
 " Linting/Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"
+" Need that for CPP linting apparently, let's see if it works out
+Plug 'vim-syntastic/syntastic'      
 
 " Navigation plugins
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
+
 " Navigate with web inside camelCase etc
 Plug 'chaoren/vim-wordmotion'
 Plug 'easymotion/vim-easymotion'
@@ -17,10 +21,22 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 
 " Editing improvements
 Plug 'svermeulen/vim-subversive'
+Plug 'svermeulen/vim-cutlass'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
 Plug 'honza/vim-snippets'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
+Plug 'michaeljsmith/vim-indent-object'
+
+Plug 'goerz/jupytext.vim'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Interactive scratchpad
+Plug 'metakirby5/codi.vim'
 
 " UI
 Plug 'kien/ctrlp.vim'
@@ -29,6 +45,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'lervag/vimtex'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'sheerun/vim-polyglot'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " UI related
 Plug 'vim-airline/vim-airline'
@@ -88,6 +106,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> <space>k :call <SID>show_documentation()<CR>
+
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -177,6 +196,9 @@ let g:airline_theme='distinguished'
 
 set shortmess+=c
 
+" Disable concealment e.g. in json and latex files
+au BufNewFile,BufRead *.md,*.tex,*.json set cole=0
+
 " Automatically refresh files when they are changed outside the buffer
 set autoread
 
@@ -189,20 +211,31 @@ set nowritebackup
 set ignorecase                    " ignore case when searching
 set smartcase                     " turn on smartcase
 
-" Tab and Indent configuration
-set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+
+set colorcolumn=80
+  " make a vertical column in the background at 80 characters
+
+highlight ColorColumn ctermbg=0
+" make it black in terminal vims (my terminal vim looks the same as my GUI vim)
+" see :help ctermbg for a list of colors that can be used in the terminal
+
+set tw=80
+set linebreak wrap
+
+au BufNewFile,BufRead *.py | set tabstop=4 | set softtabstop=4 | set shiftwidth=4 | set tw=0
 
 set updatetime=300
 set cmdheight=2
 set signcolumn=yes
 
 " Center vertically
-set scrolloff=10
+set scrolloff=999
 
 " Use system clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " LaTeX:
 let g:vimtex_compiler_progname = 'nvr'
@@ -215,9 +248,9 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_format_enabled = 1
 
-" Easymotion: 
+" Easymotion:
 " Keep cursor column when JK motion
-let g:EasyMotion_startofline = 0 
+let g:EasyMotion_startofline = 0
 
 " Fzf:
 " configuration
@@ -261,7 +294,6 @@ let g:vista_default_executive = 'coc'
 
 " Wordmotion:
 " let g:wordmotion_spaces = ',_-.:<>/(){}*&'
-
 " incsearch.vim x fuzzy x vim-easymotion
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
@@ -304,19 +336,21 @@ map <A-x> :q!<cr>
 map <A-e> :w<cr>
 map <A-v> <C-v>
 
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
+
 " Switch 2 letters
 nmap <Leader>x xph
-
-" Enter search mode
-map <Leader>s /
 
 " Go to first and last characters in line
 map <space>l $
 map <space>h ^
 
 " Easymotion bindings
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+nmap <Leader>es <Plug>(easymotion-s2)
+nmap <Leader>et <Plug>(easymotion-t2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
@@ -324,6 +358,10 @@ map <Leader>k <Plug>(easymotion-k)
 nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
+
+nmap <leader>s <plug>(SubversiveSubstituteRange)
+xmap <leader>s <plug>(SubversiveSubstituteRange)
+nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 
 " Vim-Vista bindings
 nmap <space>v :Vista!!<cr>
@@ -337,3 +375,37 @@ nmap <space>e :CocCommand explorer<cr>
 map <space>zs <Plug>(incsearch-easymotion-/)
 map <space>zS <Plug>(incsearch-easymotion-?)
 map <space>zg <Plug>(incsearch-easymotion-stay)
+
+" c++ syntax highlighting
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["cpp", "c"],
+    \ "passive_filetypes": ["rust", "python"]}
+
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+" The following two lines are optional. Configure it to your liking!
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
+let g:markdown_syntax_conceal = 0
+
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Chromium'
+let vim_markdown_preview_github=1
+
+" vim surround mappings for latex
+let b:surround_{char2nr('e')}
+  \ = "\\begin{\1environment: \1}\n\t\r\n\\end{\1\1}"
+let b:surround_{char2nr('c')} = "\\\1command: \1{\r}"
+
+" g:subversivePromptWithActualCommand=1
+
+" "in document" (from first line to last; cursor at top--ie, gg)
+xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
+onoremap <silent> id :<c-u>normal! GVgg<cr>

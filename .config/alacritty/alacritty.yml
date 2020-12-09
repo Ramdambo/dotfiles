@@ -10,8 +10,12 @@ font:
     style: Italic
   size: 12
 
-# color_start
-# gruvbox_dark.yaml
+window:
+  padding:
+    x: 5
+    y: 5
+
+
 # Colors (Gruvbox dark)
 colors:
   # Default colors
@@ -42,4 +46,3 @@ colors:
     magenta: '0xd3869b'
     cyan:    '0x8ec07c'
     white:   '0xebdbb2'
-# color_end

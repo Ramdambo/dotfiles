@@ -1,14 +1,5 @@
-#include "$HOME/.cache/wal/colors-sway"
 xwayland enable
 input * xkb_layout "de"
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-#gaps inner 20px
-#gaps outer 10px
 
 ### Variables
 #
@@ -23,66 +14,55 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 
-# Your preferred application launcher
-# Note: it's recommended that you pass the final command to sway
-#set $menu dmenu_path | wofi -c $HOME/.config/wofi/config -s $HOME/.config/wofi/styles.css | xargs swaymsg exec --¬
-set $menu rofi -show run
+for_window [app_id="launcher"] floating enable, border pixel 10, sticky enable
+for_window [app_id="filemanager"] floating enable, border pixel 10, sticky enable
+set $menu exec alacritty -d 55 18 --class launcher -e env TERMINAL_COMMAND="alacritty -e" sway-launcher-desktop
+set $filemanager exec alacritty -d 80 20 --class filemanager -e env TERMINAL_COMMAND="alacritty -e" ranger
 
-#hide_edge_borders pixel
+gaps inner 20
+gaps outer 20
+
 default_border pixel
-for_window [app_id="^.*"] border pixel 5
-for_window [class="^.*"] border pixel 5
+for_window [app_id="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 0
 for_window [app_id="pavucontrol"] floating enable
 for_window [class="feh"] floating enable
 
-set $exec_i3_groups exec --no-startup-id i3-workspace-groups
+bindsym $mod+n exec --no-startup-id swaynewws
 
-# Switch active workspace group
-bindsym $mod+g exec --no-startup-id i3-switch-active-workspace-group
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
-# Assign workspace to a group
-bindsym $mod+Shift+g exec --no-startup-id i3-assign-workspace-to-group
-
-# Select workspace to focus on
-bindsym $mod+c exec --no-startup-id i3-focus-on-workspace
-
-# Move the focused container to another workspace
-bindsym $mod+Shift+w exec --no-startup-id i3-move-to-workspace
-
-# Rename/renumber workspace. Uses Super+Alt+n
-bindsym Mod1+Mod4+n exec --no-startup-id i3-rename-workspace
-
-bindsym $mod+1 $exec_i3_groups workspace-number 1
-bindsym $mod+2 $exec_i3_groups workspace-number 2
-bindsym $mod+3 $exec_i3_groups workspace-number 3
-bindsym $mod+4 $exec_i3_groups workspace-number 4
-bindsym $mod+5 $exec_i3_groups workspace-number 5
-bindsym $mod+6 $exec_i3_groups workspace-number 6
-bindsym $mod+7 $exec_i3_groups workspace-number 7
-bindsym $mod+8 $exec_i3_groups workspace-number 8
-bindsym $mod+9 $exec_i3_groups workspace-number 9
-bindsym $mod+0 $exec_i3_groups workspace-number 10
-
-bindsym $mod+Shift+1 $exec_i3_groups move-to-number 1
-bindsym $mod+Shift+2 $exec_i3_groups move-to-number 2
-bindsym $mod+Shift+3 $exec_i3_groups move-to-number 3
-bindsym $mod+Shift+4 $exec_i3_groups move-to-number 4
-bindsym $mod+Shift+5 $exec_i3_groups move-to-number 5
-bindsym $mod+Shift+6 $exec_i3_groups move-to-number 6
-bindsym $mod+Shift+7 $exec_i3_groups move-to-number 7
-bindsym $mod+Shift+8 $exec_i3_groups move-to-number 8
-bindsym $mod+Shift+9 $exec_i3_groups move-to-number 9
-bindsym $mod+Shift+0 $exec_i3_groups move-to-number 10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # Switch to previous/next workspace (in all groups).
-bindsym $mod+z workspace prev
-bindsym $mod+u workspace next
+bindsym $mod+z exec --no-startup-id swaygo prev
+bindsym $mod+u exec --no-startup-id swaygo next
+bindsym $mod+Shift+z exec --no-startup-id swaymove prev
+bindsym $mod+Shift+u exec --no-startup-id swaymove next
+bindsym $mod+Shift+Alt+z exec --no-startup-id swaygomove prev
+bindsym $mod+Shift+Alt+u exec --no-startup-id swaygomove next
 
 
 ### Output configuration
-#
-
-output * bg ~/Pictures/Wallpapers/neon.jpg fill
+output * bg ~/Pictures/Wallpapers/elcapitan.jpg fill
 output HDMI-A-1 resolution 1920x1080 position 0,0
 output eDP-1 resolution 1920x1080 position 0,1080
 
@@ -96,6 +76,9 @@ bindsym $mod+q kill
 
 # Start your launcher
 bindsym $mod+d exec $menu
+
+# Start filemanager
+bindsym $mod+i exec $filemanager
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -235,15 +218,20 @@ mode "$mode_system" {
 bindsym $mod+Shift+m mode "$mode_system"
 
 
-# "Alt-Tab"
-bindsym $mod+Tab exec rofi -show window
+# Screenshotting
+# Notifcation
 
-bindsym F11 exec grim
-bindsym Shift+F11 exec grim -g "$(slurp)"
+set $notification notify-send -i "$GRIM_DEFAULT_DIR/$(ls -Art $GRIM_DEFAULT_DIR | tail -n1)" "Grim" "Took a screenshot"
 
+
+bindsym F11 exec grim && $notification
+bindsym Shift+F11 exec grim -g "$(slurp)" && $notification
 # Notification daemon
 exec mako
 
 # Make unfocused windows transparent
-exec python ~/.config/sway/inactive-windows-transparency.py
+#exec python ~/.config/sway/inactive-windows-transparency.py
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Alternating layout
+exec --no-startup-id autotiling
