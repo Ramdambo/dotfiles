@@ -4,16 +4,23 @@ let maplocalleader = ','
 
 call plug#begin('~/.vim/plugged')
 
-" Linting/Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"
-" Need that for CPP linting apparently, let's see if it works out
-Plug 'vim-syntastic/syntastic'      
+" LSP stuff
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
-" Navigation plugins
-" Plug 'unblevable/quick-scope'
+Plug 'nvie/vim-flake8'
 
-" Navigate with web inside camelCase etc
+" Autocompletion
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Snippet support
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'thomasfaingnaert/vim-lsp-snippets'
+Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+
+" Navigate with w/e/b inside camelCase etc
 Plug 'chaoren/vim-wordmotion'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
@@ -22,31 +29,31 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " Editing improvements
 Plug 'svermeulen/vim-subversive'
 Plug 'svermeulen/vim-cutlass'
+
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-markdown'
+
 Plug 'jiangmiao/auto-pairs'
 Plug 'honza/vim-snippets'
 Plug 'godlygeek/tabular'
-Plug 'tpope/vim-markdown'
 Plug 'michaeljsmith/vim-indent-object'
-
-Plug 'goerz/jupytext.vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-" Interactive scratchpad
-Plug 'metakirby5/codi.vim'
-
 " UI
 Plug 'kien/ctrlp.vim'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
 Plug 'liuchengxu/vista.vim'
 Plug 'lervag/vimtex'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'sheerun/vim-polyglot'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " UI related
 Plug 'vim-airline/vim-airline'
@@ -54,132 +61,58 @@ Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 " Better Visual Guide
 Plug 'Yggdroot/indentLine'
+Plug 'voldikss/vim-floaterm'
 
 " Misc
 Plug 'airblade/vim-rooter'
 
 " Themes
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sainnhe/gruvbox-material'
-Plug 'doums/darcula'
-Plug 'gryf/wombat256grf'
 
 
 " Formatter
 Plug 'fisadev/vim-isort'
+
+" Startsite
+Plug 'glepnir/dashboard-nvim'
+
 call plug#end()
 
-" CoC
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+let g:lsp_fold_enabled = 0
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+nmap <buffer> gd <plug>(lsp-definition)
+nmap <buffer> gr <plug>(lsp-references)
+nmap <buffer> gi <plug>(lsp-implementation)
+nmap <buffer> gt <plug>(lsp-type-definition)
+nmap <buffer> <leader>rn <plug>(lsp-rename)
+nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+nmap <buffer> K <plug>(lsp-hover)
+nmap <buffer> <F3> :LspDocumentFormat<cr>
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" Refresh on Ctrl-Space
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> <space>k <Plug>(coc-diagnostic-prev)
-nmap <silent> <space>j <Plug>(coc-diagnostic-next)
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>" : "\<cr>"
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" allow modifying the completeopt variable, or it will
+" be overridden all the time
+let g:asyncomplete_auto_completeopt = 0
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" Use K to show documentation in preview window.
-nnoremap <silent> <space>k :call <SID>show_documentation()<CR>
+" Line highlighting (?)
+highlight link LspErrorText GruvboxRedSign " requires gruvbox
+highlight clear LspWarningLine
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" Highlight all references of the symbol under the cursor
+let g:lsp_highlight_references_enabled = 1
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-noremap <F3> :Format<CR>
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>r  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Coc Stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+set completeopt=menuone,noinsert,noselect,preview
 syntax on
 
 set number relativenumber
@@ -225,7 +158,7 @@ highlight ColorColumn ctermbg=0
 set tw=80
 set linebreak wrap
 
-au BufNewFile,BufRead *.py | set tabstop=4 | set softtabstop=4 | set shiftwidth=4 | set tw=0
+" au BufNewFile,BufRead *.py | set tabstop=4 | set softtabstop=4 | set shiftwidth=4 | set tw=0
 
 set updatetime=300
 set cmdheight=2
@@ -288,9 +221,9 @@ endfunction
 
 " Vista:
 " UI configuration
-let g:vista_fzf_preview = ['right:50%']
+" let g:vista_fzf_preview = ['right:50%']
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
+let g:vista_default_executive = 'vim_lsp'
 
 " Wordmotion:
 " let g:wordmotion_spaces = ',_-.:<>/(){}*&'
@@ -333,16 +266,20 @@ map <A-S-l> :vsplit<cr>
 " Exit commands
 map <A-y> :wq<cr>
 map <A-x> :q!<cr>
+
 map <A-e> :w<cr>
 map <A-v> <C-v>
 
+
+" "in document" (from first line to last; cursor at top--ie, gg)
+xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
+onoremap <silent> id :<c-u>normal! GVgg<cr>
+
+" Need that because of vim-cutlass
 nnoremap m d
 xnoremap m d
 nnoremap mm dd
 nnoremap M D
-
-" Switch 2 letters
-nmap <Leader>x xph
 
 " Go to first and last characters in line
 map <space>l $
@@ -367,31 +304,11 @@ nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 nmap <space>v :Vista!!<cr>
 nmap <space>f :Vista finder<cr>
 
-" Coc-Explorer
-nmap <space>e :CocCommand explorer<cr>
-
 "Fuzzy + Incsearch + Easymotion
 " noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 map <space>zs <Plug>(incsearch-easymotion-/)
 map <space>zS <Plug>(incsearch-easymotion-?)
 map <space>zg <Plug>(incsearch-easymotion-stay)
-
-" c++ syntax highlighting
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["cpp", "c"],
-    \ "passive_filetypes": ["rust", "python"]}
-
-let g:syntastic_cpp_checkers = ['cpplint']
-let g:syntastic_c_checkers = ['cpplint']
-let g:syntastic_cpp_cpplint_exec = 'cpplint'
-" The following two lines are optional. Configure it to your liking!
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
 
 let g:markdown_syntax_conceal = 0
 
@@ -404,8 +321,32 @@ let b:surround_{char2nr('e')}
   \ = "\\begin{\1environment: \1}\n\t\r\n\\end{\1\1}"
 let b:surround_{char2nr('c')} = "\\\1command: \1{\r}"
 
-" g:subversivePromptWithActualCommand=1
 
-" "in document" (from first line to last; cursor at top--ie, gg)
-xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
-onoremap <silent> id :<c-u>normal! GVgg<cr>
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+
+" shortcut to go to next position
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+
+" shortcut to go to previous position
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+
+" Dashboard Nvim use FZF
+let g:dashboard_default_executive ='fzf'
+
+let g:dashboard_custom_header = [
+\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+\]
+
+map <leader>tt :FloatermNew<cr>
+map <leader>tp :'<,'>FloatermNew python<cr>
+
+nnoremap <space>e <cmd>CHADopen<cr>
+
+let g:chadtree_settings = { 'theme.text_colour_set': 'nerdtree_syntax_dark' }

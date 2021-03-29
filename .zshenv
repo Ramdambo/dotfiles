@@ -11,8 +11,16 @@ alias et="exa --tree"
 alias eg="exa --long --git"
 alias el="exa --long"
 
+alias gcof="git checkout --"
+
+alias mkdir="mkdir -p"
+
 mkcd() {
-   mkdir -p $1
+   mkdir $1
    cd $1
 }
 
+fznvim () {
+	file=$(fzf)
+	nvim $file
+}
