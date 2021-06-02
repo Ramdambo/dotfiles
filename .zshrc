@@ -50,22 +50,8 @@ antigen theme romkatv/powerlevel10k
 # Tell Antigen that you're done.
 antigen apply
 
-# autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-
-# Better searching in command mode
-# bindkey -M vicmd '?' history-incremental-pattern-search-backward
-# bindkey -M vicmd '/' history-incremental-pattern-search-forward
-
-# # Beginning search with arrow keys
-# bindkey "^[OA" up-line-or-beginning-search
-# bindkey "^[OB" down-line-or-beginning-search
-# bindkey -M vicmd "k" up-line-or-beginning-search
-# bindkey -M vicmd "j" down-line-or-beginning-search
+ # Beginning search with arrow keys
 bindkey -M viins jj vi-cmd-mode
-
-# zle -N up-line-or-beginning-search
-# zle -N down-line-or-beginning-search
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -75,4 +61,5 @@ eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+{ eval `ssh-agent` } &> /dev/null
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

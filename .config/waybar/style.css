@@ -12,7 +12,6 @@ window#waybar {
 }
 
 #window {
-    /*font-weight: bold;*/
     font-family: "Ubuntu";
 }
 
@@ -47,14 +46,8 @@ window#waybar {
     font-weight: bold;
 }
 
-#battery {
-}
-
 #battery icon {
     color: red;
-}
-
-#battery.charging {
 }
 
 @keyframes blink {
@@ -73,29 +66,19 @@ window#waybar {
     animation-direction: alternate;
 }
 
-#cpu {
-}
-
-#memory {
-}
-
-#network {
+#battery.critical:not(.charging) {
+    color: red;
+    animation-name: blink;
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #network.disconnected {
     background: #f53c3c;
 }
 
-#pulseaudio {
-}
-
-#pulseaudio.muted {
-}
-
 #custom-spotify {
     color: rgb(102, 220, 105);
 }
-
-#tray {
-}
-

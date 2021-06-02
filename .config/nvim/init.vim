@@ -36,9 +36,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-markdown'
 
 Plug 'jiangmiao/auto-pairs'
-Plug 'honza/vim-snippets'
 Plug 'godlygeek/tabular'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
@@ -69,6 +69,7 @@ Plug 'airblade/vim-rooter'
 " Themes
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sainnhe/gruvbox-material'
+Plug 'arcticicestudio/nord-vim'
 
 
 " Formatter
@@ -79,29 +80,35 @@ Plug 'glepnir/dashboard-nvim'
 
 call plug#end()
 
+map q: <Nop>
 
-let g:lsp_fold_enabled = 0
+let g:lsp_fold_enabled = 1
+set foldmethod=syntax
 
 nmap <buffer> gd <plug>(lsp-definition)
 nmap <buffer> gr <plug>(lsp-references)
 nmap <buffer> gi <plug>(lsp-implementation)
+nmap <buffer> gs <plug>(lsp-document-symbol-search)
+nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+nmap <buffer> gr <plug>(lsp-references)
 nmap <buffer> gt <plug>(lsp-type-definition)
 nmap <buffer> <leader>rn <plug>(lsp-rename)
-nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+nmap <buffer> ]g <plug>(lsp-next-diagnostic)
 nmap <buffer> K <plug>(lsp-hover)
-nmap <buffer> <F3> :LspDocumentFormat<cr>
+nmap <buffer> <F3> <plug>(lsp-document-format)
 
 " Refresh on Ctrl-Space
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>" : "\<cr>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
 " allow modifying the completeopt variable, or it will
 " be overridden all the time
 let g:asyncomplete_auto_completeopt = 0
+
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Line highlighting (?)
@@ -125,12 +132,17 @@ set nolazyredraw
 
 " UI themes
 colorscheme gruvbox-material
+" colorscheme nord
 let g:airline_theme='distinguished'
 
 set shortmess+=c
 
-" Disable concealment e.g. in json and latex files
-au BufNewFile,BufRead *.md,*.tex,*.json set cole=0
+" Disable concealment e.g. in markdown and latex files
+set conceallevel=0
+let g:vim_markdown_conceal = 0
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+let g:vim_markdown_conceal_code_blocks = 0
 
 " Automatically refresh files when they are changed outside the buffer
 set autoread
@@ -148,8 +160,16 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
+" make a vertical column in the background at 80 characters
 set colorcolumn=80
-  " make a vertical column in the background at 80 characters
+
+" Highlight current line in the current window only
+set cursorline
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
 
 highlight ColorColumn ctermbg=0
 " make it black in terminal vims (my terminal vim looks the same as my GUI vim)
@@ -158,17 +178,15 @@ highlight ColorColumn ctermbg=0
 set tw=80
 set linebreak wrap
 
-" au BufNewFile,BufRead *.py | set tabstop=4 | set softtabstop=4 | set shiftwidth=4 | set tw=0
-
 set updatetime=300
 set cmdheight=2
 set signcolumn=yes
 
 " Center vertically
-set scrolloff=999
+" set scrolloff=999
 
 " Use system clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " LaTeX:
 let g:vimtex_compiler_progname = 'nvr'
@@ -275,6 +293,10 @@ map <A-v> <C-v>
 xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
 onoremap <silent> id :<c-u>normal! GVgg<cr>
 
+" Remap adding marks
+nnoremap ;am m
+nnoremap ;gm '
+
 " Need that because of vim-cutlass
 nnoremap m d
 xnoremap m d
@@ -303,6 +325,7 @@ nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 " Vim-Vista bindings
 nmap <space>v :Vista!!<cr>
 nmap <space>f :Vista finder<cr>
+nmap <space>F :FZF<cr>
 
 "Fuzzy + Incsearch + Easymotion
 " noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
@@ -344,8 +367,11 @@ let g:dashboard_custom_header = [
 \ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 \]
 
-map <leader>tt :FloatermNew<cr>
-map <leader>tp :'<,'>FloatermNew python<cr>
+let g:floaterm_keymap_toggle = "<Leader>tt"
+
+map <leader>tp :FloatermNew python<cr>
+map <leader>tP :'<,'>FloatermNew python<cr>
+map <leader>tg :FloatermNew lazygit<cr>
 
 nnoremap <space>e <cmd>CHADopen<cr>
 

@@ -1,11 +1,10 @@
-// vim: set filetype=json: */
 {
     "layer": "top", 
     "position": "bottom", 
     "height": 24, 
     "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "battery", "tray", "clock"],
+    "modules-right": ["pulseaudio", "network", "cpu", "battery","clock", "tray"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -35,16 +34,19 @@
         "format": "{usage}% "
     },
     "battery": {
-        "bat": "BAT0",
+        "format": "{capacity}% <span font='Font Awesome 5 Free 11'>{icon}</span>",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": "{H}h{M}m",
+        "format-charging": "{capacity}% - {time} <span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span>",
+        "format-full": "Charged <span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span>",
+        "interval": 10,
         "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
+            "warning": 25,
+            "critical": 10
         },
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "tooltip": false
     },
-    "network": {
+   "network": {
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-disconnected": "Disconnected ⚠"
