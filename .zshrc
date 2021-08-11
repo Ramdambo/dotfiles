@@ -58,8 +58,9 @@ bindkey -M viins jj vi-cmd-mode
 
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
+eval "$(register-python-argcomplete your_script)"
+{ eval `ssh-agent` } &> /dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-{ eval `ssh-agent` } &> /dev/null
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
