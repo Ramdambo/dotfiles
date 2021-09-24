@@ -64,3 +64,6 @@ eval "$(register-python-argcomplete your_script)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway

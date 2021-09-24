@@ -30,9 +30,10 @@ xnoremap m d
 nnoremap mm dd
 nnoremap M D
 
-nnoremap <leader>b :Buffers<cr>
-nnoremap <space>b :bprevious<cr>
-nnoremap <space>n :bnext<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <space>d :Bdelete<cr>
+nnoremap <silent> <space>b :bprevious<cr>
+nnoremap <silent> <space>n :bnext<cr>
 
 " Easymotion bindings
 nmap <Leader>es <Plug>(easymotion-s2)
@@ -83,5 +84,3 @@ map <leader>tP :'<,'>FloatermNew python<cr>
 map <leader>tg :FloatermNew lazygit<cr>
 
 nnoremap <leader>n :CHADopen<cr>
-
-imap <silent> <c-p> <Plug>(completion_trigger)

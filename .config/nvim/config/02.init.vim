@@ -34,3 +34,10 @@ set signcolumn=yes
 
 " Use system clipboard
 set clipboard=unnamedplus
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=1
+
+" Autoclose if CHADtree is last window open
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == "CHADTree") | q | endif
