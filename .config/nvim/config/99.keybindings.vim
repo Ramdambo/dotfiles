@@ -2,6 +2,8 @@
 map <space>l $
 map <space>h ^
 
+nmap Y yy
+
 " Prevent accidentally going into Ex mode
 map Q qq
 
@@ -10,12 +12,6 @@ inoremap jj <esc>
 
 " Stop highlighting search results
 nnoremap <A-h> :nohlsearch<cr>
-
-" Split navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
 
 map <A-e> :w<cr>
 map <A-v> <C-v>
@@ -55,7 +51,7 @@ nmap <space>vv :Vista!!<cr>
 nmap <space>vf :Vista finder<cr>
 
 " FZF: 
-nmap <space>F :FZF<cr>
+nmap <leader>F :Files<cr>
 
 " Incsearch + Easymotion
 map <space>zs <Plug>(incsearch-easymotion-/)
@@ -84,3 +80,6 @@ map <leader>tP :'<,'>FloatermNew python<cr>
 map <leader>tg :FloatermNew lazygit<cr>
 
 nnoremap <leader>n :CHADopen<cr>
+
+nmap <A-j> 10j
+nmap <A-k> 10k

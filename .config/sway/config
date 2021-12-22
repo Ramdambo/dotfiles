@@ -187,8 +187,8 @@ bindsym $mod+Shift+n exec playerctl next
 bindsym $mod+Shift+p exec playerctl previous
 
 # class                 border  backgr. text    indicator child_border
-client.unfocused        #494A6B #494A6B #494A6B #494A6B   #494A6B
-client.focused          #7678AC #7678AC #7678AC #7678AC   #7678AC
+client.unfocused        #333333 #333333 #333333 #333333   #333333
+client.focused          #c9545d #c9545d #c9545d #c9545d   #c9545d
  
 # Exit menu
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -211,8 +211,9 @@ bindsym $mod+Shift+m mode "$mode_system"
 
 set $notification notify-send -i "$GRIM_DEFAULT_DIR/$(ls -Art $GRIM_DEFAULT_DIR | tail -n1)" "Grim" "Took a screenshot"
 
-bindsym F11 exec grim && $notification
-bindsym Shift+F11 exec grim -g "$(slurp)" && $notification
+bindsym F11 exec --no-startup-id  && $notification
+bindsym Shift+F11 exec --no-startup-id grim -g "$(slurp)" && $notification
+
 #
 # Notification daemon
 exec mako

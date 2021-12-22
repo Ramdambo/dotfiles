@@ -3,7 +3,7 @@
 " highlight clear LspWarningLine
 
 set completeopt=menuone,noinsert,noselect,preview
-syntax on
+" syntax on
 
 " UI themes
 colorscheme materialbox
@@ -15,38 +15,38 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 set shortmess+=c
 " make a vertical column in the background at 80 characters
-set colorcolumn=80
+" set colorcolumn=80
 
 " Highlight current line in the current window only
-set cursorline
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
+" set cursorline
+" augroup CursorLine
+"   au!
+"   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"   au WinLeave * setlocal nocursorline
+" augroup END
 
 " make it black in terminal vims (my terminal vim looks the same as my GUI vim)
 " see :help ctermbg for a list of colors that can be used in the terminal
-highlight ColorColumn ctermbg=0
+" highlight ColorColumn ctermbg=0
 
 " Fzf:
 " configuration
-let g:fzf_preview_window = 'right:60%'
+let g:fzf_preview_window = 'right:50%'
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 
 let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
 
 function! OpenFloatingWin()
-   let height = &lines - 3
-   let width = float2nr(&columns - (&columns * 2 / 10))
-   let col = float2nr((&columns - width) / 2)
+   let height = &lines - 5
+   let width = float2nr(&columns)
+   let col = float2nr((&columns - width))
 
    let opts = {
         \ 'relative': 'editor',
         \ 'row': height * 0.3,
         \ 'col': col + 30,
         \ 'width': width * 2 / 3,
-        \ 'height': height / 2
+        \ 'height': height
         \ }
 
    let buf = nvim_create_buf(v:false, v:true)

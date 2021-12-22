@@ -36,10 +36,9 @@ antigen bundle pip
 antigen bundle command-not-found
 antigen bundle wd
 antigen bundle npm
-antigen bundle vi-mode 
 antigen bundle python
 antigen bundle archlinux
-antigen bundle "MichaelAquilina/zsh-you-should-use"
+antigen bundle MichaelAquilina/zsh-you-should-use
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -63,7 +62,7 @@ eval "$(register-python-argcomplete your_script)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/share/coursier/bin:$PATH"
 
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
