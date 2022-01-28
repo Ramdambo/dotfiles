@@ -26,7 +26,6 @@ xnoremap m d
 nnoremap mm dd
 nnoremap M D
 
-nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <space>d :Bdelete<cr>
 nnoremap <silent> <space>b :bprevious<cr>
 nnoremap <silent> <space>n :bnext<cr>
@@ -45,13 +44,6 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 nmap <leader>s <plug>(SubversiveSubstituteRange)
 xmap <leader>s <plug>(SubversiveSubstituteRange)
 nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
-
-" Vista:
-nmap <space>vv :Vista!!<cr>
-nmap <space>vf :Vista finder<cr>
-
-" FZF: 
-nmap <leader>F :Files<cr>
 
 " Incsearch + Easymotion
 map <space>zs <Plug>(incsearch-easymotion-/)
@@ -80,6 +72,14 @@ map <leader>tP :'<,'>FloatermNew python<cr>
 map <leader>tg :FloatermNew lazygit<cr>
 
 nnoremap <leader>n :CHADopen<cr>
+
+map <silent> <space>ca :CodeActionMenu<cr>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nmap <A-j> 10j
 nmap <A-k> 10k

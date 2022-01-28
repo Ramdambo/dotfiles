@@ -1,87 +1,76 @@
 call plug#begin('~/.vim/plugged')
 
-" LSP stuff
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'mattn/vim-lsp-settings'
-" Plug 'nvie/vim-flake8'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'akinsho/bufferline.nvim'
 
-" Autocompletion
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'BurntSushi/ripgrep'
 
-" Snippet support
-Plug 'neovim/nvim-lspconfig'
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-cmdline'
-" Plug 'hrsh7th/nvim-cmp'
-" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" Plug 'thomasfaingnaert/vim-lsp-snippets'
-" Plug 'thomasfaingnaert/vim-lsp-ultisnips'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-
-" Navigate with w/e/b inside camelCase etc
 Plug 'chaoren/vim-wordmotion'
+
 Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
 
 Plug 'famiu/bufdelete.nvim'
 
-" Editing improvements
-Plug 'svermeulen/vim-subversive'
-Plug 'svermeulen/vim-cutlass'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'jiangmiao/auto-pairs'
+Plug 'glepnir/dashboard-nvim'
 Plug 'godlygeek/tabular'
 
-Plug 'tpope/vim-markdown'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch.vim'
+" Plug 'honza/vim-snippets'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-Plug 'liuchengxu/graphviz.vim'
-" UI
-Plug 'kien/ctrlp.vim'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'rafi/awesome-vim-colorschemes'
-
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'nathanaelkane/vim-indent-guides'
-
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'jakewvincent/texmagic.nvim'
+Plug 'jamessan/vim-gnupg'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Plug 'lervag/vimtex'
-Plug 'jakewvincent/texmagic.nvim'
+Plug 'kien/ctrlp.vim'
+Plug 'kosayoda/nvim-lightbulb'
+Plug 'kyazdani42/nvim-web-devicons'
 
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
-" Display git icons at the beginning of each line
-Plug 'airblade/vim-gitgutter'
+Plug 'Matt-A-Bennett/surround-funk.vim'
+Plug 'mhartington/formatter.nvim'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
-" For usage with Vista and fzf
-Plug 'liuchengxu/vista.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'rmagatti/auto-session'
+Plug 'romgrk/nvim-treesitter-context'
+
+" Plug 'SirVer/ultisnips'
+Plug 'SmiteshP/nvim-gps'
+Plug 'stevearc/aerial.nvim'
+Plug 'stevearc/dressing.nvim'
+Plug 'svermeulen/vim-cutlass'
+Plug 'svermeulen/vim-subversive'
+
+Plug 'tanvirtin/vgit.nvim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+
 Plug 'voldikss/vim-floaterm'
 
-" Misc
-Plug 'airblade/vim-rooter'
-Plug 'rmagatti/auto-session'
-
-" Startsite
-Plug 'glepnir/dashboard-nvim'
+Plug 'weilbith/nvim-code-action-menu'
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
+

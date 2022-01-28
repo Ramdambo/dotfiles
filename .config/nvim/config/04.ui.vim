@@ -1,19 +1,3 @@
-" Line highlighting (?)
-" highlight link LspErrorText GruvboxRedSign " requires gruvbox
-" highlight clear LspWarningLine
-
-set completeopt=menuone,noinsert,noselect,preview
-" syntax on
-
-" UI themes
-colorscheme materialbox
-
-let g:airline_theme = 'base16'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-set shortmess+=c
 " make a vertical column in the background at 80 characters
 " set colorcolumn=80
 
@@ -24,10 +8,6 @@ set shortmess+=c
 "   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 "   au WinLeave * setlocal nocursorline
 " augroup END
-
-" make it black in terminal vims (my terminal vim looks the same as my GUI vim)
-" see :help ctermbg for a list of colors that can be used in the terminal
-" highlight ColorColumn ctermbg=0
 
 " Fzf:
 " configuration
@@ -102,3 +82,8 @@ let vim_markdown_preview_browser='Chromium'
 let vim_markdown_preview_github=1
 
 let g:chadtree_settings = { 'theme.text_colour_set': 'nerdtree_syntax_dark' }
+
+lua <<EOF
+require('bufferline').setup()
+require('vgit').setup()
+EOF

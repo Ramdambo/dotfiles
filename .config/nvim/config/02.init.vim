@@ -44,6 +44,10 @@ set splitbelow
 
 set number
 
+set termguicolors
+" Set colorscheme
+autocmd vimenter * :colorscheme gruvbox
+
 autocmd BufEnter * :set scroll=5
 
 autocmd FileType python setlocal indentkeys-=<:>
@@ -59,3 +63,5 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == "CHADTree") | q | endif
 
 " Start completion
 let g:coq_settings = { 'auto_start': 'shut-up' }
+
+autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
