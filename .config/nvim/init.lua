@@ -1,0 +1,13 @@
+require('plugins')
+require('settings')
+require('lsp')
+require('treesitter_setup')
+require('completion_setup')
+require('telescope_setup')
+require('statusline')
+require('aerial_setup')
+require('texmagic_setup')
+require('kommentary_setup')
+require('subversive_setup')
+require('keymap')
+
