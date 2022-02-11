@@ -1,0 +1,13 @@
+*
+!.config/nvim
+!.config/sway
+!.config/alacritty
+!.config/mako
+!.config/waybar
+!.config/rofi
+!.zshrc
+!.zprofile
+!.zshenv
+!.p10k.zsh
+!.direnvrc
+!.gitignore

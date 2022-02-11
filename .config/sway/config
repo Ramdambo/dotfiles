@@ -16,9 +16,12 @@ set $term alacritty
 
 for_window [app_id="^launcher$"] floating enable, border pixel 10, sticky enable
 for_window [app_id="filemanager"] floating enable, border pixel 10, sticky enable
+for_window [app_id="calculator"] floating enable, border pixel 10, sticky enable
 
 set $menu exec alacritty --class launcher -e env TERMINAL_COMMAND="alacritty -e" sway-launcher-desktop
 set $filemanager exec alacritty --class filemanager -e env TERMINAL_COMMAND="alacritty -e" ranger
+set $calculator exec alacritty --class calculator -e env TERMINAL_COMMAND="alacritty -e" python -i $HOME/.config/calculator_startup.py
+
 
 gaps inner 5
 gaps outer 5
@@ -52,7 +55,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 ### Output configuration
-output * bg ~/Pictures/Wallpapers/redmoon.png fill
+# output * bg ~/Pictures/Wallpapers/redmoon.png fill
+output * bg ~/Pictures/Wallpapers/fractal_neon2.png fill
 output HDMI-A-1 resolution 1920x1080 position 0,0
 output eDP-1 resolution 1920x1080 position 0,1080
 
@@ -69,6 +73,10 @@ bindsym $mod+d exec $menu
 
 # Start filemanager
 bindsym $mod+i exec $filemanager
+
+# Use python as a calculator
+bindsym $mod+m exec --no-startup-id $calculator
+
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -189,7 +197,7 @@ bindsym $mod+Shift+p exec playerctl previous
 # class                 border  backgr. text    indicator child_border
 client.unfocused        #333333 #333333 #333333 #333333   #333333
 client.focused          #c9545d #c9545d #c9545d #c9545d   #c9545d
- 
+
 # Exit menu
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -214,14 +222,14 @@ set $notification notify-send -i "$GRIM_DEFAULT_DIR/$(ls -Art $GRIM_DEFAULT_DIR 
 bindsym F11 exec --no-startup-id  && $notification
 bindsym Shift+F11 exec --no-startup-id grim -g "$(slurp)" && $notification
 
+
 #
 # Notification daemon
 exec mako
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-# Alternating layout
-# exec --no-startup-id autotiling & 
-
 # Display bar for brightness/volume
 exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
