@@ -1,10 +1,10 @@
-*
-!.config/nvim
-!.config/sway
-!.config/alacritty
-!.config/mako
-!.config/waybar
-!.config/rofi
+/*
+!.config/nvim/*
+!.config/sway/*
+!.config/alacritty/*
+!.config/mako/*
+!.config/waybar/*
+!.config/rofi/*
 !.zshrc
 !.zprofile
 !.zshenv
