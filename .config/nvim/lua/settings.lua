@@ -23,7 +23,7 @@ vim.opt.softtabstop=2
 vim.opt.shiftwidth=2
 
 vim.opt.linebreak= true
-vim.opt.scroll=5
+vim.opt.scrolloff=5
 
 vim.opt.updatetime=300
 vim.opt.cmdheight=2
@@ -40,6 +40,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.opt.termguicolors = true
 vim.opt.scroll = 5
@@ -47,12 +48,10 @@ vim.opt.scroll = 5
 --Start completion
 vim.api.nvim_set_var('coq_settings', { auto_start = 'shut-up' })
 
-vim.cmd("colorscheme gruvbox")
-
-require('bufferline').setup()
-require('vgit').setup()
-
+vim.cmd [[colorscheme gruvbox]]
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-
---Autoclose if CHADtree is last window open
+-- Autoclose if CHADtree is last window open
 vim.cmd [[autocmd BufEnter * if (winnr("$") == 1 && &filetype == "CHADTree") | q | endif]]
+
+-- Remove trailing whitespaces
+vim.cmd [[autocmd BufWritePre * %s/\s\+$//e]]

@@ -65,3 +65,5 @@ eval "$(register-python-argcomplete your_script)"
 export PATH="/usr/lib:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/share/coursier/bin:$PATH"
 
 export XDG_CURRENT_DESKTOP=sway
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
